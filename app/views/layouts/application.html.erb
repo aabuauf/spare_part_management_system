@@ -1,15 +1,75 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>SparePartManagementSystem</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 
-  <body>
+  <title>SparePartSystem</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="/stylesheets/main.css" />
+  <style>
+    .sidenav {
+      width: 150px;
+      position: fixed;
+      z-index: 1;
+      top: 15px;
+      right: 7px;
+      background: #ffffff;
+      overflow-x: hidden;
+      padding: 8px 0;
+      -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+      -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+      box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    }
+
+    .sidenav a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #2196F3;
+      display: block;
+    }
+
+    .sidenav a:hover {
+      color: #064579;
+    }
+  </style>
+</head>
+
+<body>
+<% if is_logged_in?%>
+  <div class="sidenav">
+  
+    <%= link_to "Home", '/' %>
+    <%= link_to "New Spare", new_spare_url %>
+    <%= link_to "Edit Profile", users_edit_url %>
+    <%= link_to "Log out", signout_url %>
+
+  </div>
+<% end%>
+
+  <div class="wrapper">
+
     <%= yield %>
-  </body>
+
+    <footer class="branding">
+      <small>&copy; 2019 <strong>SparePartManagementSystem</strong></small>
+    </footer>
+  </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <!--[if lt IE 7]>
+      <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+      <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+    <![endif]-->
+</body>
+
 </html>

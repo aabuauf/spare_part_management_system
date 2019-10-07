@@ -1,0 +1,30 @@
+<style>
+.right {
+  position: absolute;
+  right: 100px;
+  width: 300px;
+  
+  padding: 10px;
+}
+</style>
+<h1>Welcome, <%= @user.name %></h1><br>
+<br>
+<div class="right">
+<%= form_tag(factories_index_url, method: :get) do %>
+  <%= text_field_tag :term %>
+  <%= submit_tag 'Search' %>
+<% end %>
+</div>
+
+<h2>Your factory is <%= @factory.name %> </h2>
+
+
+<br>
+<% if @equipment != [] %>
+<% @equipment.each do |eachEq|%>
+    
+    <%= link_to eachEq.tag_no,equipment_url(eachEq) %><br>
+<% end %>
+<%else%>
+  <h3>No Equipment found</h3>
+<%end%>

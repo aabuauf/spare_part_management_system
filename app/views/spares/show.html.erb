@@ -1,0 +1,78 @@
+<style>
+    .right {
+      text-align: right;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+     .sidenavedit {
+          width: 150px;
+          position: fixed;
+          z-index: 1;
+          top: 150px;
+          right: 7px;
+          background: #ffffff;
+          overflow-x: hidden;
+          padding: 8px 0;
+          -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
+          -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
+          box-shadow: 0 0 10px rgba(0,0,0,.3);
+        }
+    
+        .sidenavedit a {
+          padding: 6px 8px 6px 16px;
+          text-decoration: none;
+          font-size: 25px;
+          
+          display: block;
+        }
+    
+        .sidenavedit a:hover {
+          color: #064579;
+    }
+      .fontred {
+        color: #ff0000;
+      }
+      .fontblue{
+        color: #2196F3;
+      }
+    </style>
+
+    <h1>Details for spare <%= @spare.code%>, <%=@spare.description%></h1>
+    
+    <ul>
+        <li>Manufacture:  <%= @spare.manufacture%></li>
+        <li>Part no:  <%= @spare.part_no%></li>
+        <li>Stock:  <%= @spare.qty%></li>
+    </ul><br>
+    
+      <div class="sidenavedit">
+        <a class="fontblue" href="/spare/<%= @spare.id%>/edit">Edit</a>
+        <a class="fontred" href="/spare/<%= @spare.id%>/delete">Delete</a>
+        
+      </div>
+    
+    
+    <h3>Equipment</h3>
+    
+    
+    <table style="width:100%">
+      <tr>
+        <th>Equipment tag no</th>
+        <th>Manufacture</th> 
+        <th>Factory</th>
+        <th>Qty installed</th>
+      </tr>
+    
+    <% @equipment.each do |eachEq|%>
+      <tr>
+        
+        <td><%= link_to eachEq.tag_no, equipment_url(eachEq)%></td>
+        <td><%= eachEq.manufacture%></td>
+        <td><%= eachEq.factory.name%></td>
+        <td><%= eachEq.boms.find_by_spare_id(@spare.id).qty_installed%></td>
+      </tr>
+    <%end%>
+    </table>
+    
+    

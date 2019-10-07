@@ -1,0 +1,31 @@
+<style>
+    table, th, td {
+      border: 1px solid black;
+    }
+</style>
+    
+    <h1>Spare for <%= @eq.tag_no %> in <%= @eq.factory.name%></h1><br>
+    <br>
+    
+    <% if @spares%>
+    <table style="width:100%">
+      <tr>
+        <th>Code</th>
+        <th>Description</th> 
+        <th>Qty Installed</th>
+      </tr>
+    
+    <% @spares.each do |eachSpare|%>
+      <tr>
+        
+        <td><%= link_to eachSpare.code, spare_url(eachSpare)%></td>
+        <td><%= eachSpare.description%></td>
+        <td><%= @eq.boms.find_by_spare_id(eachSpare.id).qty_installed%></td>
+      </tr>
+    <%end%>
+    
+
+    </table>
+    <% else%>
+        <h2>No Spare attached to this equipment</h2>
+    <% end%>
