@@ -40,14 +40,14 @@
 <% if is_super_user?%>
   <div class="sidenavedit">
     
-      <%= link_to "Edit", edit_factory_equipment_url(@eq.factory,@eq), class: "fontblue" %>
-      <%= link_to "Delete", factory_equipment_url(@eq.factory,@eq),{ :class => "fontred", :method => :delete, :data => { confirm: "Really?" }} %>
+      <%= link_to "Edit", edit_factory_equipment_url(@equipment.factory,@equipment), class: "fontblue" %>
+      <%= link_to "Delete", factory_equipment_url(@equipment.factory,@equipment),{ :class => "fontred", :method => :delete, :data => { confirm: "Really?" }} %>
     
   </div>
 <% end %>
 <% end%>
 
-    <h1>Spare for <%= @eq.tag_no %> in <%= @eq.factory.name%></h1><br>
+    <h1>Spare for <%= @equipment.tag_no %> in <%= @equipment.factory.name%></h1><br>
     <br>
     
     <% if @spares%>
@@ -63,7 +63,7 @@
         
         <td><%= link_to eachSpare.code, spare_url(eachSpare)%></td>
         <td><%= eachSpare.description%></td>
-        <td><%= @eq.boms.find_by_spare_id(eachSpare.id).qty_installed%></td>
+        <td><%= @equipment.boms.find_by_spare_id(eachSpare.id).qty_installed%></td>
       </tr>
     <%end%>
     

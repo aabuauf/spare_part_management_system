@@ -1,10 +1,10 @@
 class EquipmentController < ApplicationController
     skip_before_action :verify_authenticity_token
-  
+    before_action :get_equipment , only: [:show, :edit, :update, :destroy]
 def show
-    if is_logged_in?
-        @eq = Equipment.find_by_id(params[:id])
-        @spares = @eq.spares
+    if is_valid_user?
+        
+        @spares = @equipment.spares
         
     else
         redirect_to signin_url
@@ -12,10 +12,9 @@ def show
 end
 
   def index
-    @user = current_user
-    if !is_logged_in? || @user == nil
-      redirect_to signin_url
-    else
+      
+    if is_valid_user?
+   
       @factory = @user.factory
       if params[:term]
         @equipment = Equipment.search_for_tag(params[:term],@factory.id) 
@@ -23,6 +22,8 @@ end
         @equipment = @factory.equipment
     
       end
+    else
+        redirect_to signin_url
     end
 
   end
@@ -33,7 +34,7 @@ end
 
   def create
    
-    if is_logged_in? && is_super_user?
+    if is_valid_user? && is_super_user?
         @equipment = Equipment.new(equipment_params)
         if !@equipment.valid?
         render :new
@@ -47,13 +48,14 @@ end
         redirect_to signin_url
     end
   end
+  
   def edit
-    @equipment = Equipment.find_by_id(params[:id])
+    
   end
 
   def update
-    if is_logged_in? && is_super_user?
-        @equipment = Equipment.find_by_id(params[:id])
+    if is_valid_user? && is_super_user?
+       
         if !@equipment.valid?
         render :new
         else
@@ -67,11 +69,11 @@ end
     end
   end
   def destroy
-    binding.pry
-    if is_logged_in? && is_super_user?
-        @equipment = Equipment.find_by_id(params[:id])
+      
+    if is_valid_user? && is_super_user?
+       
         @equipment.destroy
-        binding.pry
+          
         redirect_to  factory_equipment_index_url(@equipment.factory)
         
         
@@ -84,5 +86,9 @@ end
 
   def equipment_params
     params.require(:equipment).permit(:tag_no, :manufacture, :factory_id)
+  end
+
+  def get_equipment
+    @equipment = Equipment.find_by_id(params[:id])
   end
 end

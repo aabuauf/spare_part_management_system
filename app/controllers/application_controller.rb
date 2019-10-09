@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
     helper_method :is_logged_in?
     helper_method :is_super_user?
+    helper_method :current_user
 
     def is_logged_in?
         !!session[:user_id]
@@ -21,9 +22,9 @@ class ApplicationController < ActionController::Base
     def is_valid_user?
         @user = current_user
         if !is_logged_in? || @user == nil
-          true
-        else
           false
+        else
+          true
         end
     end
 end

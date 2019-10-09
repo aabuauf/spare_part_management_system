@@ -10,7 +10,7 @@
 <h1>Welcome, <%= @user.name %></h1><br>
 <br>
 <div class="right">
-<%= form_tag(factories_index_url, method: :get) do %>
+<%= form_tag(equipment_index_url, method: :get) do %>
   <%= text_field_tag :term %>
   <%= submit_tag 'Search' %>
 <% end %>
@@ -37,4 +37,3 @@
 <%else%>
   <h3>No Equipment found</h3>
 <%end%>
-factory_equipment

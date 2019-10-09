@@ -9,6 +9,7 @@
     }
 
     /* Full-width input fields */
+    .input,
     input[type=email],
     input[type=password] {
       width: 100%;
@@ -20,7 +21,7 @@
     }
 
     /* Set a style for all buttons */
-    button {
+    .button, button {
       background-color: #2196F3;
       color: white;
       padding: 14px 20px;
@@ -30,7 +31,7 @@
       width: 100%;
     }
 
-    button:hover {
+    .button:hover {
       opacity: 0.8;
     }
 
@@ -179,14 +180,14 @@
         <%= form_for @user, url: sessions_create_url, method: :get do |f| %>
         <p>
           <%= f.label :Email %><br>
-          <%= f.text_field :email %>
+          <%= f.email_field :email %>
         </p><br>
 
         <p>
           <%= f.label :password %><br>
           <%= f.password_field :password %>
         </p>
-        <%= f.submit "Sign In" %>
+        <%= f.submit "Sign In", :class =>  'button'  %>
         <% end %>
       </div>
 

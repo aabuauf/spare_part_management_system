@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    
+     
     if auth
       #facebook login
       @user = User.find_by(email: auth['info']['email'])
@@ -19,20 +19,23 @@ class SessionsController < ApplicationController
         redirect_to '/'
       end
     else
+       
       @user = User.find_by(:email => params[:user][:email])
 
       if @user && @user.authenticate(params[:user][:password])
         session[:user_id]=@user.id
         # redirect_to '/'
+         
         if is_super_user?
-          binding.pry
+           
           redirect_to factories_index_url
           
         else
-          binding.pry
+           
           redirect_to equipment_index_url
         end
       else
+         
         #error no account
         redirect_to signup_path
       end
@@ -40,10 +43,10 @@ class SessionsController < ApplicationController
   end
     #@user = User.find_or_create_by(email: auth['info']['email'])
     # # session[:user_id] = @user.id
-    # binding.pry
+    #  
     # if @user.factory== nil 
     #   # please complete the data form
-    #   binding.pry
+    #    
     #   render 'users/new'
     # end
   def destroy
