@@ -7,4 +7,5 @@ class Spare < ApplicationRecord
     validates :description, presence: true
     validates :qty, presence: true
     validates :qty, numericality: true
+    validates :code, uniqueness: true
 end

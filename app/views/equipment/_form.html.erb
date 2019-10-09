@@ -1,0 +1,36 @@
+<style>
+    .button {
+        background-color: #2196F3;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+</style>
+
+
+<%= form_for @equipment do |f| %>
+<p>
+    <%= f.label :tag_no %><br>
+    <%= f.text_field :tag_no, :required => true %>
+</p><br>
+<p>
+    <%= f.label :manufacture %><br>
+    <%= f.text_field :manufacture %>
+</p><br>
+
+
+
+<P>
+    <%= f.collection_select  :factory_id, Factory.all, :id, :name%>
+</p>
+
+
+</p>
+<%# <button class="signupbtn"> %>
+<%= f.submit  :class =>  'button'  %>
+
+<% end %>

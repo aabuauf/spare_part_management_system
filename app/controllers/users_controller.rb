@@ -12,7 +12,13 @@ class UsersController < ApplicationController
       else
         @user.save
         session[:user_id]=@user.id
-        redirect_to factories_index_url
+        if is_super_user?
+          binding.pry
+          redirect_to factories_index_url
+        else
+          binding.pry
+          redirect_to equipment_index_url
+        end
       end
   end
 

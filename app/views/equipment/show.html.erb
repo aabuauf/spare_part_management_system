@@ -2,8 +2,51 @@
     table, th, td {
       border: 1px solid black;
     }
-</style>
+
+
+        .sidenavedit {
+          width: 150px;
+          position: fixed;
+          z-index: 1;
+          top: 210px;
+          right: 7px;
+          background: #ffffff;
+          overflow-x: hidden;
+          padding: 8px 0;
+          -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
+          -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
+          box-shadow: 0 0 10px rgba(0,0,0,.3);
+        }
     
+        .sidenavedit a {
+          padding: 6px 8px 6px 16px;
+          text-decoration: none;
+          font-size: 25px;
+          
+          display: block;
+        }
+    
+        .sidenavedit a:hover {
+          color: #064579;
+    }
+      .fontred {
+        color: #ff0000;
+      }
+      .fontblue{
+        color: #2196F3;
+      }
+</style>
+<% if is_logged_in?%>
+<% if is_super_user?%>
+  <div class="sidenavedit">
+    
+      <%= link_to "Edit", edit_factory_equipment_url(@eq.factory,@eq), class: "fontblue" %>
+      <%= link_to "Delete", factory_equipment_url(@eq.factory,@eq),{ :class => "fontred", :method => :delete, :data => { confirm: "Really?" }} %>
+    
+  </div>
+<% end %>
+<% end%>
+
     <h1>Spare for <%= @eq.tag_no %> in <%= @eq.factory.name%></h1><br>
     <br>
     

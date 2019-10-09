@@ -23,7 +23,15 @@ class SessionsController < ApplicationController
 
       if @user && @user.authenticate(params[:user][:password])
         session[:user_id]=@user.id
-        redirect_to '/'
+        # redirect_to '/'
+        if is_super_user?
+          binding.pry
+          redirect_to factories_index_url
+          
+        else
+          binding.pry
+          redirect_to equipment_index_url
+        end
       else
         #error no account
         redirect_to signup_path

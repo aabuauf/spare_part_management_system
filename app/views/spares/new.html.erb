@@ -1,0 +1,56 @@
+<style>
+    input[type=submit] {
+        background-color: #2196F3;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100;
+    }
+</style>
+
+<h1>Create New Spare</h1>
+
+<%= form_for @spare  do |f| %>
+            <p>
+            <%= f.label :code %><br>
+            <%= f.text_field :code, :required => true %>
+            </p><br>
+            <p>
+            <%= f.label :description %><br>
+            <%= f.text_field :description, :required => true %>
+            </p><br>
+
+            <p>
+            <%= f.label :manufacture %><br>
+            <%= f.text_field :manufacture %>
+            </p>
+            <p>
+            <%= f.label :part_no %><br>
+            <%= f.text_field :part_no %>
+            </p>
+
+            <p>
+            <%= f.label "Stock Qty" %><br>
+            <%= f.text_field :qty %>
+            </p>
+
+ 
+
+            <%# <button class="signupbtn"> %>
+            <%= f.submit "Create", :class =>  'button'  %><br>
+
+ 
+  <% @eq.each do |eacheq| %>
+  <%= f.check_box( "equipment", {multiple: true}, eacheq.tag_no.upcase,nil) %>
+  <%= f.label eacheq.tag_no.upcase%>
+
+
+<%# f.fields_for :boms, eacheq.boms.build do |boms_fields| %>
+    <%# boms_fields.text_field :qty_installed %>
+  <%# end %>
+
+  <br>
+<% end %>
+    <% end %>

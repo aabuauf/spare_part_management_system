@@ -9,22 +9,19 @@
 </style>
 <h1>Welcome, <%= @user.name %></h1><br>
 <br>
-<div class="right">
-<%= form_tag(factories_index_url, method: :get) do %>
-  <%= text_field_tag :term %>
-  <%= submit_tag 'Search' %>
-<% end %>
-</div>
 
-<h2>Your factory is <%= @factory.name %> </h2>
+
+<h2>Your factory is <%= @user.factory.name %> </h2>
+<h3>Here is all factories (For SuperUsers only)</h3>
 
 
 <br>
-<% if @equipment != [] %>
-<% @equipment.each do |eachEq|%>
+<% if @factories != [] %>
+<% @factories.each do |eachfactory|%>
     
-    <%= link_to eachEq.tag_no,equipment_url(eachEq) %><br>
+    <strong><%= eachfactory.name %></strong>
+     has <%= link_to eachfactory.equipment.count,factory_equipment_index_url(eachfactory)  %> Equipment<br>
 <% end %>
 <%else%>
-  <h3>No Equipment found</h3>
+  <h3>No Factories found</h3>
 <%end%>

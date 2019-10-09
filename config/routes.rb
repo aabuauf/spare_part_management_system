@@ -9,12 +9,15 @@ Rails.application.routes.draw do
   get 'users/destroy'
   get 'users/index'
   get 'users/show'
-  # get 'equipment/:id'
+  
    get 'factories/index'
    get '/auth/facebook/callback' => 'sessions#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get '/' => 'factories#index'
-
+  get '/' => 'equipment#index'
+  resources :factories, only: [:index] do
+    # nested resource for posts
+    resources :equipment, only: [:show, :index, :new, :edit, :destroy, :update]
+  end
   resources :equipment
   resources :spares
 end
