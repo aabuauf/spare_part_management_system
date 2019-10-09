@@ -41,7 +41,7 @@
   <div class="sidenavedit">
     
       <%= link_to "Edit", edit_factory_equipment_url(@equipment.factory,@equipment), class: "fontblue" %>
-      <%= link_to "Delete", factory_equipment_url(@equipment.factory,@equipment),{ :class => "fontred", :method => :delete, :data => { confirm: "Really?" }} %>
+      <%= link_to "Delete", factory_equipment_url(@equipment.factory,@equipment),method: :delete %>
     
   </div>
 <% end %>

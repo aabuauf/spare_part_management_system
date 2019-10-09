@@ -12,7 +12,7 @@ def show
 end
 
   def index
-      
+    
     if is_valid_user?
    
       @factory = @user.factory
@@ -69,7 +69,7 @@ end
     end
   end
   def destroy
-      
+    
     if is_valid_user? && is_super_user?
        
         @equipment.destroy

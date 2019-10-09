@@ -13,7 +13,7 @@
   <title>SparePartSystem</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <link rel="stylesheet" href="/stylesheets/main.css" />
   <style>
     .sidenav {
@@ -47,8 +47,11 @@
 <body>
 <% if is_logged_in?%>
   <div class="sidenav">
-  
+  <% if is_super_user?%>
+    <%= link_to "Home", factories_url %>
+  <%else%>
     <%= link_to "Home", '/' %>
+  <% end %>  
     <%= link_to "New Spare", new_spare_url %>
     <%# <%= link_to "Edit Profile", users_edit_url %> 
     <%= link_to "Log out", signout_url %>
