@@ -41,16 +41,19 @@
             <%# <button class="signupbtn"> %>
             <%= f.submit "Create", :class =>  'button'  %><br>
 
- 
+ <%= f.label "Qty installed for Equipment" %><br>
+<%= f.fields_for :boms do |boms_fields| %>
+    <%= boms_fields.text_field :qty_installed %>
+  <% end %>
+  <br>
   <% @eq.each do |eacheq| %>
   <%= f.check_box( "equipment", {multiple: true}, eacheq.tag_no.upcase,nil) %>
   <%= f.label eacheq.tag_no.upcase%>
+<br>
 
 
-<%# f.fields_for :boms, eacheq.boms.build do |boms_fields| %>
-    <%# boms_fields.text_field :qty_installed %>
-  <%# end %>
-
-  <br>
 <% end %>
+
+
+  
     <% end %>
